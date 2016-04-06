@@ -1,0 +1,19 @@
+<h1>Your Cart</h1>
+<!-- Print each item in the cart array -->
+
+<div ng-controller="CartController as cartCtrl">
+
+  <table ng-repeat="product in cartCtrl.cart.products">
+<!--     <p><img src=" {{ product.imageUrl }} " width="250" height="350"></p> -->
+      <tr>
+      <td><strong>{{ product.name }}</strong></td>
+      <td>${{ product.price }}</td>
+      <td>{{ product.unitSize }}</td>
+      <td><button ng-click="cartCtrl.removeFromCart(product)">Remove Item</button>
+      </tr>
+  <table>
+  <p>{{ cartCtrl.cartTotal  }}</p>
+
+  <button>Checkout</button>
+  <button>Empty Cart</button>
+</div>

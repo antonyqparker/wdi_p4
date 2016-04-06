@@ -1,0 +1,16 @@
+<h1>Products</h1>
+<section ng-controller="MainController as main">
+  {{ main.productCount }}
+  <h1>Carboor farms products</h1>
+  <ul id="products">
+    <li ng-repeat="product in main.products" class="col-sm-4">
+      <p><img src=" {{ product.imageUrl }} " width="250" height="350"></p>
+      <strong>{{ product.name }}</strong>
+      <p> {{ product.price }} </p>
+      <p> {{ product.unitSize }} </p>
+      <p> {{ product.description }} </p>
+      
+      <button ng-click="main.addToCart(product)">Add to cart</button>
+    </li>
+  </ul>
+</section>

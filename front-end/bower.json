@@ -1,0 +1,26 @@
+{
+  "name": "front-end",
+  "homepage": "https://github.com/antonyqparker/wdi_p4",
+  "authors": [
+    "Antony Parker <tonyramone1990@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.3",
+    "angular-resource": "^1.5.3",
+    "angular-jwt": "^0.0.9",
+    "angular-ui-router": "^0.2.18",
+    "bootstrap": "^3.3.6"
+  }
+}
