@@ -1,19 +1,28 @@
+<div class="container">
 <h1>Your Cart</h1>
 <!-- Print each item in the cart array -->
 
-<div ng-controller="CartController as cartCtrl">
 
-  <table ng-repeat="product in cartCtrl.cart.products">
+<div>
+
+  <table ng-repeat="product in cartCtrl.cart.products track by $index">
 <!--     <p><img src=" {{ product.imageUrl }} " width="250" height="350"></p> -->
       <tr>
       <td><strong>{{ product.name }}</strong></td>
       <td>${{ product.price }}</td>
       <td>{{ product.unitSize }}</td>
-      <td><button ng-click="cartCtrl.removeFromCart(product)">Remove Item</button>
+      <td><button ng-click="cartCtrl.removeFromCart(product, $index)" class="removeBut btn btn-secondary">Remove</button>
       </tr>
   <table>
-  <p>{{ cartCtrl.cartTotal  }}</p>
 
-  <button>Checkout</button>
-  <button>Empty Cart</button>
+  <div class="total">
+    <p>Total =  ${{ cartCtrl.cartTotal }}</p>
+  </div>
+
+  <div class="total">
+    <p> + VAT (10%) = ${{ cartCtrl.addVat }} </p>
+  </div>
+
+  <button><a ui-sref-active="active" ui-sref="payment" class="btn btn-secondary">Make Payment</a></button>
+  <button ng-click="cartCtrl.clearCart()" class="btn btn-secondary">Empty Cart</button>
 </div>

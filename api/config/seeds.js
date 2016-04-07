@@ -24,6 +24,24 @@ Product.create([{
   unitSize: "250 ml",
   description: "This oil is an overpriced bomb",
   imageUrl:"public/images/walnut_oil.jpg"
+},{ 
+  name: "Hazelnut Butter",
+  price: 20.00,
+  unitSize: "250 ml",
+  description: "This oil is the bomb",
+  imageUrl:"public/images/hazelnut_butter.jpg"
+},{
+  name: "Almond Butter",
+  price: 15.00,
+  unitSize: "250 ml",
+  description: "This oil is nearly the bomb",
+  imageUrl:"public/images/almond_butter.jpg"
+},{
+  name: "Walnut Butter",
+  price: 30.00,
+  unitSize: "250 ml",
+  description: "This oil is an overpriced bomb",
+  imageUrl:"public/images/walnut_butter.jpg"
 }], function(err, products) {
   if(err) console.log(err);
   else console.log(products);

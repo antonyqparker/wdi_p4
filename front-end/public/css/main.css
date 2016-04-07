@@ -8,7 +8,17 @@ body{
 .navbar{
   width:100%;
   height:150px;
-  border-bottom: 3px solid #643410;
+  border-bottom: 1px solid #643410;
+}
+
+.navbar a{
+  color:#643410;
+}
+
+.nav>li>a:hover{
+  background-color: #643410;
+  opacity: 0.5;
+  color:white;
 }
 
 #logo{
@@ -18,9 +28,9 @@ body{
 #homeImg{
   width:100%;
   height:550px;
-  margin-top: 50px;
-  border-top: 3px solid #643410;
-  border-bottom: 3px solid #643410;
+/*  margin-top: 50px;*/
+/*  border-top: 3px solid #643410;
+  border-bottom: 3px solid #643410;*/
 
 }
 
@@ -31,14 +41,88 @@ body{
 }
 
 #footerBox{
-  margin-top: 40px;
+  margin-top: 25px;
   text-align: center;
 }
 
 table, th, td {
     border: 1px solid black;
+    text-align: center;
 }
 
 th, td {
-    padding: 15px;
+    width:100px;
+    padding:5px;
+}
+
+#total{
+  width:100px;
+  border:1px solid black;
+}
+
+#footer{
+  margin-top:20px;
+  position:absolute;
+  bottom:0;
+  width:100%;
+  height:60px;   /* Height of the footer */
+}
+
+#address{
+  margin-top:15px;
+}
+
+#address p{
+  color:#643410;
+}
+
+#cartBox{
+/*  border:2px solid #643410;*/
+  margin-right:20px;
+  padding:5px;
+}
+
+#cartBox span{
+  margin-right: 5px;
+}
+
+.navbar-right li a {
+  margin-top: 0px;
+}
+
+.removeBut{
+  background-color: #d55d0e;
+}
+
+h1{
+  color:#643410;
+}
+
+.btn{
+  background-color:#d55d0e;
+  color:white;
+}
+
+.submit{
+  margin-top:20px;
+}
+
+label{
+  color:#643410;
+}
+
+input{
+  margin-bottom:7px;
+}
+
+.aboutPics{
+  margin-left:-70px;
+}
+
+#paragraph{
+  margin-top:30px;
+}
+
+.aboutPics img{
+  border-radius:8px;
 }

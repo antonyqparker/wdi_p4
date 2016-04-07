@@ -10,12 +10,13 @@ function CartController(Cart, cartService) {
 
   this.cartTotal = cartService.cartTotal();
 
-  
+  this.addVat = this.cartTotal * 1.1;
 
-  self.removeFromCart = function(product) {
-    console.log(product);
-    cartService.remove(product);
-    
+  self.clearCart = function (){
+    cartService.clearCart()
   }
 
+  self.removeFromCart = function(product, index) {
+    cartService.remove(product, index);
+  }
 }

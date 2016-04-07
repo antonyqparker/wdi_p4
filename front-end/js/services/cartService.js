@@ -31,28 +31,23 @@ function CartService(Cart, tokenService, $window, $rootScope) {
 
   return {
     add: function(product) {
-      products.push(product._id);
+      products.push(product);
       updateCart();
     },
 
-    remove: function(product) {
-      console.log("removing");
-      var idx = products.indexOf(product._id);
-      console.log(products)
-      console.log(idx);
-      if(idx > -1) {
-        products.splice(idx, 1);
-        updateCart();
-      }
+    remove: function(product, id) {
+      products.splice(id, 1);
+      updateCart();
     },
 
     getProductCount: function() {
       return products.length;
     },
 
-    clear: function() {
+    clearCart: function() {
       products = [];
       updateCart();
+      
     },
 
     getId: function() {
@@ -63,6 +58,15 @@ function CartService(Cart, tokenService, $window, $rootScope) {
       return products.reduce(function(sum, cartItem){
               return cartItem.price + sum;
             }, 0)
+    },
+
+    addVat:function(){
+      var total = products.reduce(function(sum, cartItem){
+              return cartItem.price + sum;
+            }, 0)
+      var vat = total * 0.10;
+      var addVat = total + vat;
+      return addVat;
     }
   }
 }

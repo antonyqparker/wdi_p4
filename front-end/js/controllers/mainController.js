@@ -15,5 +15,5 @@ function MainController(Product, cartService, $scope) {
 
   self.addToCart = function(product) {
     cartService.add(product);
-  }
+  } 
 }
