@@ -4,13 +4,13 @@ var bcrypt = require('bcrypt');
 var userSchema = new mongoose.Schema({
   firstName: { type: String },
   lastName: { type: String },
-  email: { type: String, unique: true },
+  email: { type: String, unique: true, required: true },
   address1: { type: String },
   address2: String,
   city: { type: String },
   postcode: { type: String },
   country: { type: String },
-  passwordHash: { type: String }
+  passwordHash: { type: String, required: true }
 }, {
   timestamps: true
 });
@@ -45,6 +45,7 @@ userSchema.path('passwordHash')
   });
 
 userSchema.methods.validatePassword = function(password){
+  console.log(password, this.passwordHash);
   return bcrypt.compareSync(password, this.passwordHash);
 }
 

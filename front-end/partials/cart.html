@@ -1,19 +1,17 @@
+<!-- CART -->
 <div class="container">
-<h1>Your Cart</h1>
-<!-- Print each item in the cart array -->
+<section ng-show="cartCtrl.step == 'cart'" id="cart">
 
-
-<div>
-
+  <h1>Your Cart</h1>
   <table ng-repeat="product in cartCtrl.cart.products track by $index">
-<!--     <p><img src=" {{ product.imageUrl }} " width="250" height="350"></p> -->
-      <tr>
+    <!--     <p><img src=" {{ product.imageUrl }} " width="250" height="350"></p> -->
+    <tr>
       <td><strong>{{ product.name }}</strong></td>
       <td>${{ product.price }}</td>
       <td>{{ product.unitSize }}</td>
       <td><button ng-click="cartCtrl.removeFromCart(product, $index)" class="removeBut btn btn-secondary">Remove</button>
-      </tr>
-  <table>
+    </tr>
+  </table>
 
   <div class="total">
     <p>Total =  ${{ cartCtrl.cartTotal }}</p>
@@ -23,6 +21,143 @@
     <p> + VAT (10%) = ${{ cartCtrl.addVat }} </p>
   </div>
 
-  <button><a ui-sref-active="active" ui-sref="payment" class="btn btn-secondary">Make Payment</a></button>
   <button ng-click="cartCtrl.clearCart()" class="btn btn-secondary">Empty Cart</button>
+  <button ng-click="cartCtrl.nextStep()" class="btn btn-secondary">Purchase Items</button>
+</section>
 </div>
+
+<!-- REGISTER -->
+
+<div class="container">
+<section id="register" ng-show="cartCtrl.step == 'register'">
+<h1>Register</h1>
+
+<p>Please enter your information to proceed to payment</p>
+
+<form ng-submit="users.register()" class="form-group" novalidate>
+  <label for="username">First Name</label>
+  <input class="form-control" name="firstName" ng-model="users.currentUser.firstName">
+
+  <label for="email">Email</label>
+  <input class="form-control" name="email" ng-model="users.currentUser.email">
+
+  <label for="address1">Address 1</label>
+  <input class="form-control" name="address1" ng-model="users.currentUser.address1">
+
+  <label for="address2">Address 2</label>
+  <input class="form-control" name="address2" ng-model="users.currentUser.address2">
+
+  <label for="city">City</label>
+  <input class="form-control" name="city" ng-model="users.currentUser.city">
+
+  <label for="postcode">Postcode</label>
+  <input class="form-control" type="email" name="postcode" placeholder="Email" ng-model="users.currentUser.postcode">
+
+  <label for="country">Country</label>
+  <input class="form-control" name="country" ng-model="users.currentUser.country">
+
+  <label for="password">Password</label>
+  <input class="form-control" type="password" name="password" ng-model="users.password">
+
+  <label for="passwordConfirmation">Password Confirmation</label>
+  <input class="form-control" type="password" name="passwordConfirmation" placeholder="Retype password" ng-model="users.passwordConfirmation">
+
+  <button type="submit" class="btn btn-secondary submit" ng-click="cartCtrl.prevStep()">Back</button>
+  <button type="submit" class="btn btn-secondary submit" ng-click="cartCtrl.nextStep()">Next</button>
+</form>
+</section>
+</div>
+
+<!-- SHIPPING FORM -->
+<div class="container">
+<section ng-show="cartCtrl.step == 'shipping'">
+<h1>Delivery Address</h1>
+<form class="form-group" novalidate>
+  <label for="name">Name</label>
+  <input class="form-control" type="text" name="Name" ng-model="cartCtrl.currentUser.name">
+  <label for="address1">Address 1</label>
+  <input class="form-control" type="text" name="address1" ng-model="cartCtrl.currentUser.address1">
+  <label for="address2">Address 2</label>
+  <input class="form-control" type="text" name="address2" ng-model="cartCtrl.currentUser.address2">
+  <label for="town/city">Town/City</label>
+  <input class="form-control" type="text" name="town/city" ng-model="cartCtrl.currentUser.city">
+  <label for="postcode">Postcode</label>
+  <input class="form-control" type="text" name="postcode" ng-model="cartCtrl.currentUser.postcode">
+  <label for="country">Country</label>
+  <input class="form-control" type="text" name="country" ng-model="cartCtrl.currentUser.country">
+
+  <button type="submit" class="btn btn-secondary submit" ng-click="cartCtrl.prevStep()">Back</button>
+  <button type="submit" class="btn btn-secondary submit" ng-click="cartCtrl.nextStep()">Next</button>
+</form>
+</section>
+</div>
+
+<!-- PAYMENT -->
+<div class="container">
+  <div class="container" ng-show="cartCtrl.step == 'payment'">
+    <h1>Payment to CarboorFarms</h1>
+    {{payment.Form.$submitted}}
+    <form class="form" name="payment.Form" ng-hide="payment.paymentSuccessful" ng-submit="payment.pay()">
+      <div class="row">
+        <div class="col-sm-8">
+          <div class="form-group" ng-class="{ 'has-feedback': payment.Form.payee.$dirty, 'has-success': (payment.Form.payee.$valid && payment.Form.payee.$dirty), 'has-error': (payment.Form.payee.$invalid && payment.Form.payee.$dirty) }">
+            <label class="control-label">Card Holder's Name</label>
+            <input type="text" name="payee" class="form-control" ng-model="payment.payee" placeholder="Mr A Smith" required ng-minlength="2">
+            <span ng-if="(payment.Form.payee.$valid && payment.Form.payee.$dirty)" class="glyphicon glyphicon-ok form-control-feedback"></span>
+            <span ng-if="(payment.Form.payee.$invalid && payment.Form.payee.$dirty)" class="glyphicon glyphicon-remove form-control-feedback"></span>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label class="control-label">Total Amount to Pay</label>
+            {{ cartCtrl.cartTotal | currency: "$" }}
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-8">
+          <div class="form-group" ng-class="{ 'has-feedback': payment.Form['card-number'].$dirty, 'has-success': (payment.Form['card-number'].$valid && payment.Form['card-number'].$dirty), 'has-error': (payment.Form['card-number'].$invalid && payment.Form['card-number'].$dirty) }">
+            <label class="control-label">Card Number</label>
+            <input type="text" name="card-number" class="form-control" ng-model="payment.card.number" placeholder="4242424242424242" required ng-pattern="/^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|6(?:011|5[0-9]{2})[0-9]{12}|(?:2131|1800|35\d{3})\d{11})$/">
+            <span ng-if="(payment.Form['card-number'].$valid && payment.Form['card-number'].$dirty)" class="glyphicon glyphicon-ok form-control-feedback"></span>
+            <span ng-if="(payment.Form['card-number'].$invalid && payment.Form['card-number'].$dirty)" class="glyphicon glyphicon-remove form-control-feedback"></span>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group" ng-class="{ 'has-feedback': payment.Form.cvc.$dirty, 'has-success': (payment.Form.cvc.$valid && payment.Form.cvc.$dirty), 'has-error': (payment.Form.cvc.$invalid && payment.Form.cvc.$dirty) }">
+            <label class="control-label">CVC</label>
+            <input type="text" name="cvc" class="form-control" ng-model="payment.card.cvc" placeholder="123" required ng-maxlength="3" ng-pattern="/[0-9]{3}/">
+            <span ng-if="(payment.Form.cvc.$valid && payment.Form.cvc.$dirty)" class="glyphicon glyphicon-ok form-control-feedback"></span>
+            <span ng-if="(payment.Form.cvc.$invalid && payment.Form.cvc.$dirty)" class="glyphicon glyphicon-remove form-control-feedback"></span>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="form-group" ng-class="{ 'has-feedback': payment.Form.exp_month.$dirty, 'has-success': (payment.Form.exp_month.$valid && payment.Form.exp_month.$dirty), 'has-error': (payment.Form.exp_month.$invalid && payment.Form.exp_month.$dirty) }">
+            <label class="control-label">Expiry Month</label>
+            <input type="text" name="exp_month" class="form-control" ng-model="payment.card.exp_month" placeholder="06" required ng-pattern="/(0[1-9]|1[0-2])/">
+            <span ng-if="(payment.Form.exp_month.$valid && payment.Form.exp_month.$dirty)" class="glyphicon glyphicon-ok form-control-feedback"></span>
+            <span ng-if="(payment.Form.exp_month.$invalid && payment.Form.exp_month.$dirty)" class="glyphicon glyphicon-remove form-control-feedback"></span>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group" ng-class="{ 'has-feedback': payment.Form.exp_year.$dirty, 'has-success': (payment.Form.exp_year.$valid && payment.Form.exp_year.$dirty), 'has-error': (payment.Form.exp_year.$invalid && payment.Form.exp_year.$dirty) }">
+            <label class="control-label">Exipry Year</label>
+            <input type="text" name="exp_year" class="form-control" ng-model="payment.card.exp_year" placeholder="2016" required ng-pattern="/20(1[6-9]|2[0-9])/">
+            <span ng-if="(payment.Form.exp_year.$valid && payment.Form.exp_year.$dirty)" class="glyphicon glyphicon-ok form-control-feedback"></span>
+            <span ng-if="(payment.Form.exp_year.$invalid && payment.Form.exp_year.$dirty)" class="glyphicon glyphicon-remove form-control-feedback"></span>
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-primary" ng-click="cartCtrl.prevStep()">Back</button>
+      <button class="btn btn-primary" ui-sref="thankyou" ng-disabled="(payment.Form.$invalid||payment.Form.$submitted)">Make Payment</button>
+    </form>
+  </div>
+</body>
+</div>
+
+<section ng-show="cartCtrl.step == 'thanks'">
+  <h3>Thank you for shopping.  A confirmation email has been sent to you email account</h3>
+</section>
+

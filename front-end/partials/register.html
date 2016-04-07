@@ -1,18 +1,33 @@
 <div class="container">
 <h1>Register</h1>
 <section id="register">
-  <form ng-submit="users.register()" class="form-group" novalidate>
-    <label for="username">Username</label>
-    <input class="form-control" type="text" name="username" placeholder="Username" ng-model="users.currentUser.username">
+<form ng-submit="users.register()" class="form-group" novalidate>
+  <label for="username">First Name</label>
+  <input class="form-control" name="firstName" ng-model="users.currentUser.firstName">
 
-    <label for="email">Email</label>
-    <input class="form-control" type="email" name="email" placeholder="Email" ng-model="users.currentUser.email">
+  <label for="email">Email</label>
+  <input class="form-control" name="email" ng-model="users.currentUser.email">
 
-    <label for="password">Password</label>
-    <input class="form-control" type="password" name="password" placeholder="Password" ng-model="users.password">
+  <label for="address1">Address 1</label>
+  <input class="form-control" name="address1" ng-model="users.currentUser.address1">
 
-    <label for="passwordConfirmation">Password Confirmation</label>
-    <input class="form-control" type="password" name="passwordConfirmation" placeholder="Retype password" ng-model="users.passwordConfirmation">
+  <label for="address2">Address 2</label>
+  <input class="form-control" name="address2" ng-model="users.currentUser.address2">
+
+  <label for="city">City</label>
+  <input class="form-control" name="city" ng-model="users.currentUser.city">
+
+  <label for="postcode">Postcode</label>
+  <input class="form-control" type="email" name="postcode" placeholder="Email" ng-model="users.currentUser.postcode">
+
+  <label for="country">Country</label>
+  <input class="form-control" name="country" ng-model="users.currentUser.country">
+
+  <label for="password">Password</label>
+  <input class="form-control" type="password" name="password" ng-model="users.currentUser.password">
+
+  <label for="passwordConfirmation">Password Confirmation</label>
+  <input class="form-control" type="password" name="passwordConfirmation" placeholder="Retype password" ng-model="users.currentUser.passwordConfirmation">
 
     <button type="submit" value="Register" class="btn btn-secondary submit">Submit</button>
   </form>

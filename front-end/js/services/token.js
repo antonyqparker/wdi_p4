@@ -19,6 +19,6 @@ function TokenService($window, jwtHelper){
 
   self.getUser = function(){
     var token = self.getToken();
-    return token? jwtHelper.decodeToken(token) : null;
+    return token ? jwtHelper.decodeToken(token) : null;
   }
 }

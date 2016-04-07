@@ -35,7 +35,8 @@ function Router($stateProvider, $urlRouterProvider){
     })
     .state('products', {
       url: '/products',
-      templateUrl: 'partials/products.html'
+      templateUrl: 'partials/products.html',
+      controller: 'MainController as main'
     })
     .state('contact', {
       url: '/contact',
@@ -55,6 +56,11 @@ function Router($stateProvider, $urlRouterProvider){
       templateUrl: 'partials/payment.html',
       controller: 'PaymentController as payment'
     })
+    .state('thankyou', {
+      url: '/thankyou',
+      templateUrl: 'partials/thankyou.html',
+    })
+
 
 
   $urlRouterProvider.otherwise('/');
